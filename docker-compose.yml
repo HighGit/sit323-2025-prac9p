@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  sit3232025prac4c:
+    image: sit3232025prac4c
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production
+    ports:
+      - 3040:3040

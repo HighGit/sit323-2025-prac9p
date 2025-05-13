@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sit323-task9p-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sit323-task9p
+  template:
+    metadata:
+      labels:
+        app: sit323-task9p
+    spec:
+      containers:
+      - name: sit323-task9p
+        image: high131/sit323-task9p:latest
+        ports:
+        - containerPort: 3040
+        env:
+            - name: MONGO_URL
+              value: "mongodb://mongoadmin:secret@mongo:27017"
+            - name: PORT
+              value: "3040"

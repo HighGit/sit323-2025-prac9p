@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <script>
+        function calculate() {
+            const num1 = document.getElementById("num1").value;
+            const num2 = document.getElementById("num2").value;
+            const operation = document.getElementById("operation").value;
+
+            fetch(`/${operation}?n1=${num1}&n2=${num2}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (!isNaN(data.data))
+                    {
+                        document.getElementById("result").innerText = "Result: " + data.data;
+                    } else
+                    {
+                        document.getElementById("result").innerText = "Error: " + data.message;
+                    }
+                })
+                .catch(error => 
+                {
+                    console.error("Error:", error)
+                });
+        }
+    </script>
+</head>
+<body>
+    <h1>Simple Calculator</h1 >
+    <label>Enter first number:</label>
+    <input id="num1" required>
+    <br><br>
+    
+    <label>Enter second number:</label>
+    <input id="num2" required>
+    <br><br>
+
+    <label>Select operation:</label>
+    <select id="operation">
+        <option value="add">Add</option>
+        <option value="subtract">Subtract</option>
+        <option value="multiply">Multiply</option>
+        <option value="divide">Divide</option>
+    </select>
+    <br><br>
+
+    <button onclick="calculate()">Calculate</button>
+    <h3 id="result"></h3>
+</body>
+</html>
